@@ -21,10 +21,14 @@ export class QuotesPage {
   }
 
   ionViewDidLoad() {
-    this.quoteGroup = this.navParams.data
+    this.quoteGroup = this.navParams.data;
   }
 
-  onAddToFavorite(quote: Quote) {
+  isFavorite(quote) {
+    return  this.quotesService.isQuoteFavorite(quote);
+  }
+
+  onAddToFavorites(quote: Quote) {
     const alertBox = this.alertCtrl.create({
       title: 'Add Quote',
       subTitle: 'Are you sure?',
@@ -47,5 +51,9 @@ export class QuotesPage {
       ]
     });
     alertBox.present();
+  }
+
+  onRemoveFromFavorites(quote) {
+    this.quotesService.removeQuoteFromFavorites(quote);
   }
 }
